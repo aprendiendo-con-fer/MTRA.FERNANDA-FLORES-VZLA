@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="es" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Escolar - Mtra. Fernanda Flores</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+html,body{height:100%;margin:0;padding:0;font-family:'Nunito',sans-serif}
+:root{--rosa:#FF0040;--lavanda:#00D9FF;--menta:#39FF14;--cielo:#0055FF;--rosa-d:#FF1744;--lavanda-d:#00BFFF;--menta-d:#32CD32;--cielo-d:#0040FF;--bg:#FFFFFF;--text:#1a1a2e;--card:#FFFFFF}
+*{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--lavanda) transparent}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:var(--lavanda);border-radius:9px}
+.section-fade{animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse-dot{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.card{background:var(--card);border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.08);padding:1.25rem;transition:transform .2s,box-shadow .2s;border:1px solid #f0f0f0}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.09)}
+.btn{border-radius:14px;padding:.55rem 1.2rem;font-weight:700;transition:all .18s;cursor:pointer;border:none;font-family:inherit;font-size:.9rem;display:inline-flex;align-items:center;gap:6px}
+.btn-rosa{background:var(--blanco);color:#fff}.btn-blanco:hover{background:var(--blanco-d);color:#fff}
+.btn-lavanda{background:var(--lavanda);color:#fff}.btn-lavanda:hover{background:var(--lavanda-d);color:#fff}
+.btn-menta{background:var(--rosa);color:#000}.btn-rosa:hover{background:var(--rosa-d);color:#000}
+.btn-cielo{background:var(--cielo);color:#fff}.btn-cielo:hover{background:var(--cielo-d);color:#fff}
+.btn-sm{padding:.35rem .85rem;font-size:.8rem;border-radius:10px}
+input,select,textarea{border:2px solid #e0e0e0;border-radius:14px;padding:.5rem .85rem;font-family:inherit;font-size:.9rem;transition:border .2s;background:#fafafa;color:var(--text);width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rosa-d);box-shadow:0 0 0 3px rgba(244,166,184,.2)}
+table{width:100%;border-collapse:separate;border-spacing:0}
+th{background:var(--lavanda);color:#fff;padding:.55rem .5rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;position:sticky;top:0;z-index:2}
+th:first-child{border-radius:14px 0 0 0}th:last-child{border-radius:0 14px 0 0}
+td{padding:.45rem .5rem;font-size:.85rem;border-bottom:1px solid #e8e8e8;text-align:center}
+tr:hover td{background:#f5f5f5}
+.tab-btn{padding:.5rem 1rem;border-radius:14px 14px 0 0;font-weight:700;cursor:pointer;border:2px solid transparent;background:#f0f0f0;color:var(--text);transition:all .15s;font-family:inherit;font-size:.85rem}
+.tab-btn.active{background:#fff;border-color:var(--lavanda);border-bottom-color:#fff;color:var(--text)}
+.semaph{width:18px;height:18px;border-radius:50%;display:inline-block}
+.semaph-v{background:#4ade80}.semaph-a{background:#facc15}.semaph-r{background:#f87171}
+.badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:.72rem;font-weight:700}
+.tooltip-wrap{position:relative}.tooltip-wrap .tip{display:none;position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#3d3154;color:#fff;padding:8px 12px;border-radius:12px;font-size:.75rem;width:220px;text-align:center;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.tooltip-wrap:hover .tip,.tooltip-wrap:active .tip{display:block}
+.nav-item{display:flex;align-items:center;gap:8px;padding:.55rem 1rem;border-radius:14px;cursor:pointer;transition:all .15s;font-weight:600;font-size:.88rem;color:var(--text)}
+.nav-item:hover,.nav-item.active{background:var(--rosa);color:#fff}
+.modal-overlay{position:fixed;inset:0;background:rgba(61,49,84,.35);z-index:100;display:flex;align-items:center;justify-content:center;animation:fadeUp .2s}
+.modal-box{background:#fff;border-radius:24px;padding:2rem;max-width:480px;width:92%;box-shadow:0 20px 50px rgba(0,0,0,.12);max-height:85%;overflow-y:auto}
+.chart-bar{border-radius:8px 8px 0 0;transition:height .5s ease;min-width:28px}
+.check-mark{width:26px;height:26px;border-radius:8px;border:2px solid var(--lavanda);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:.8rem}
+.check-mark.checked{background:var(--menta);border-color:var(--menta-d);color:#fff}
+.check-mark:hover{border-color:var(--rosa-d)}
+@media(max-width:768px){.sidebar{position:fixed!important;left:-280px;z-index:90;transition:left .3s}.sidebar.open{left:0}.mobile-overlay{display:block!important}}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full" style="background:var(--bg);color:var(--text)">
+  <div id="app" class="h-full flex flex-col overflow-hidden" style="width:100%">
+   <!-- LOGIN SCREEN -->
+   <div id="login-screen" class="h-full flex items-center justify-center p-4" style="background:#FFFFFF">
+    <div class="card max-w-sm w-full" style="box-shadow:0 20px 60px rgba(0,0,0,.15)">
+     <div class="text-center mb-6">
+      <h1 class="text-2xl font-black mb-1" style="color:var(--rosa-d)">PORTAL ESCOLAR</h1>
+      <p class="text-xs font-semibold" style="color:#999">Mtra. Fernanda Flores</p>
+     </div>
+     <form onsubmit="doLogin(event)"><label class="text-xs font-bold mb-1 block">Usuario</label> <input id="login-user" type="text" placeholder="ej: maestra o alumno1" class="mb-3" required> <label class="text-xs font-bold mb-1 block">Contraseña</label> <input id="login-pass" type="password" placeholder="••••" class="mb-4" required> <button type="submit" class="btn btn-menta w-full justify-center mb-2"><i data-lucide="log-in" style="width:16px;height:16px"></i>Ingresar</button>
+      <div id="login-error" class="hidden text-xs font-bold p-2 rounded-xl mb-2" style="background:rgba(248,113,113,.2);color:#f87171"></div>
+      <p class="text-xs text-center" style="color:#999"><strong>Ingresa con tus credenciales</strong></p>
+     </form>
+    </div>
+   </div><!-- MAIN APP (hidden on login) -->
+   <div id="main-app" class="h-full flex flex-col overflow-hidden hidden" style="width:100%">
+    <!-- HEADER -->
+    <header id="main-header" style="background:#FFFFFF;border-bottom:2px solid #f0f0f0;box-shadow:0 2px 8px rgba(0,0,0,.05)" class="flex items-center justify-between px-4 py-3 flex-shrink-0 relative z-30">
+     <div class="flex items-center gap-3">
+      <button id="menu-toggle" class="md:hidden btn btn-rosa btn-sm"><i data-lucide="menu" style="width:20px;height:20px"></i></button>
+      <div>
+       <h1 id="header-title" class="text-base md:text-lg font-black tracking-tight" style="color:var(--rosa)">PORTAL ESCOLAR: MTRA. FERNANDA FLORES</h1>
+       <p id="header-sub" class="text-xs font-semibold" style="color:var(--text);opacity:.7">Nueva Escuela Mexicana · Ciclo 2024-2025</p>
+      </div>
+     </div>
+     <div class="flex items-center gap-2">
+      <span id="clock" class="hidden sm:block text-xs font-bold px-3 py-1 rounded-xl" style="background:rgba(255,255,255,.5)"></span> <button onclick="exportBackup()" class="btn btn-menta btn-sm"><i data-lucide="download" style="width:16px;height:16px"></i><span class="hidden sm:inline">Respaldo</span></button> <button onclick="logout()" class="btn btn-rosa btn-sm"><i data-lucide="log-out" style="width:16px;height:16px"></i><span class="hidden sm:inline">Salir</span></button>
+     </div>
+    </header>
+    <div class="flex flex-1 overflow-hidden">
+     <!-- SIDEBAR -->
+     <nav id="sidebar" class="sidebar flex-shrink-0 overflow-y-auto p-3 flex flex-col gap-1" style="width:230px;background:#FFFFFF;backdrop-filter:blur(8px);border-right:2px solid #f0f0f0">
+      <div class="nav-item active" data-section="inicio"><i data-lucide="home" style="width:18px;height:18px"></i>Inicio
+      </div>
+      <div class="nav-item" data-section="alumnos"><i data-lucide="users" style="width:18px;height:18px"></i>Alumnos
+      </div>
+      <div class="nav-item" data-section="asistencia"><i data-lucide="check-square" style="width:18px;height:18px"></i>Asistencia
+      </div>
+      <div class="nav-item" data-section="calificaciones"><i data-lucide="book-open" style="width:18px;height:18px"></i>Calificaciones
+      </div>
+      <div class="nav-item" data-section="sisat"><i data-lucide="bar-chart-2" style="width:18px;height:18px"></i>SISAT
+      </div>
+      <div class="nav-item" data-section="dashboard"><i data-lucide="layout-dashboard" style="width:18px;height:18px"></i>Dashboard
+      </div>
+      <div class="nav-item" data-section="fichas"><i data-lucide="file-text" style="width:18px;height:18px"></i>Fichas Descriptivas
+      </div>
+      <div class="nav-item" data-section="padres" id="nav-padres" style="display:none"><i data-lucide="heart" style="width:18px;height:18px"></i>Portal Padres
+      </div>
+      <div class="mt-auto pt-4 border-t" style="border-color:var(--lavanda)">
+       <div class="nav-item" data-section="config"><i data-lucide="settings" style="width:18px;height:18px"></i>Configuración
+       </div>
+      </div>
+     </nav>
+     <div id="mobile-overlay" class="mobile-overlay fixed inset-0 bg-black bg-opacity-30 z-80 hidden" onclick="closeSidebar()"></div><!-- MAIN CONTENT -->
+     <main id="main-content" class="flex-1 overflow-y-auto p-4 md:p-6">
+      <!-- INICIO -->
+      <section id="sec-inicio" class="section-fade">
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="card flex items-center gap-3" style="border-left:5px solid var(--rosa)">
+         <div>
+          <div class="text-2xl font-black" id="stat-total">
+           31
+          </div>
+          <div class="text-xs font-semibold" style="color:#999">
+           Alumnos
+          </div>
+         </div>
+        </div>
+        <div class="card flex items-center gap-3" style="border-left:5px solid var(--menta)">
+         <div>
+          <div class="text-2xl font-black" id="stat-asist">
+           0
+          </div>
+          <div class="text-xs font-semibold" style="color:#999">
+           Asistencia Hoy
+          </div>
+         </div>
+        </div>
+        <div class="card flex items-center gap-3" style="border-left:5px solid var(--lavanda)">
+         <div>
+          <div class="text-2xl font-black" id="stat-prom">
+           --
+          </div>
+          <div class="text-xs font-semibold" style="color:#999">
+           Promedio General
+          </div>
+         </div>
+        </div>
+        <div class="card flex items-center gap-3" style="border-left:5px solid var(--cielo)">
+         <div>
+          <div class="text-2xl font-black" id="stat-sisat">
+           --
+          </div>
+          <div class="text-xs font-semibold" style="color:#999">
+           SISAT Promedio
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="card">
+         <h3 class="font-bold mb-3 flex items-center gap-2"><i data-lucide="trending-up" style="width:18px;height:18px;color:var(--rosa-d)"></i>Resumen por Campo Formativo</h3>
+         <div id="chart-home" style="height:200px" class="flex items-end justify-around gap-2 pt-4"></div>
+         <div id="chart-home-labels" class="flex justify-around gap-2 mt-1"></div>
+        </div>
+        <div class="card">
+         <h3 class="font-bold mb-3 flex items-center gap-2"><i data-lucide="alert-circle" style="width:18px;height:18px;color:var(--rosa-d)"></i>Alertas</h3>
+         <div id="alerts-home" class="space-y-2 text-sm max-h-48 overflow-y-auto"></div>
+        </div>
+       </div>
+      </section><!-- ALUMNOS -->
+      <section id="sec-alumnos" class="section-fade hidden">
+       <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h2 class="text-xl font-black">Gestión de Alumnos</h2>
+        <div class="flex gap-2"><input id="search-al" placeholder="Buscar alumno..." class="w-48"><button onclick="showAddAlumno()" class="btn btn-rosa btn-sm"><i data-lucide="plus" style="width:16px;height:16px"></i>Agregar</button>
+        </div>
+       </div>
+       <div class="card overflow-x-auto">
+        <table>
+         <thead>
+          <tr>
+           <th>#</th>
+           <th>Nombre</th>
+           <th>Usuario</th>
+           <th>Faltas</th>
+           <th>Promedio</th>
+           <th>Acciones</th>
+          </tr>
+         </thead>
+         <tbody id="tb-alumnos"></tbody>
+        </table>
+       </div>
+      </section><!-- ASISTENCIA -->
+      <section id="sec-asistencia" class="section-fade hidden">
+       <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h2 class="text-xl font-black">Pase de Lista</h2>
+        <div class="flex items-center gap-3"><input type="date" id="asist-fecha" class="w-44"><button onclick="saveAsistencia()" class="btn btn-menta btn-sm"><i data-lucide="save" style="width:16px;height:16px"></i>Guardar</button>
+        </div>
+       </div>
+       <div class="card overflow-x-auto">
+        <table>
+         <thead>
+          <tr>
+           <th>#</th>
+           <th>Nombre</th>
+           <th>Asistió</th>
+           <th>Total Faltas</th>
+          </tr>
+         </thead>
+         <tbody id="tb-asist"></tbody>
+        </table>
+       </div>
+      </section><!-- CALIFICACIONES -->
+      <section id="sec-calificaciones" class="section-fade hidden">
+       <h2 class="text-xl font-black mb-4">Campos Formativos · Calificaciones</h2>
+       <div class="flex flex-wrap gap-2 mb-4" id="cf-tabs"></div>
+       <div class="card mb-4" id="cf-config">
+        <h3 class="font-bold mb-3">Configurar Criterios de Evaluación</h3>
+        <div id="criterios-list" class="space-y-2 mb-3"></div><button onclick="addCriterio()" class="btn btn-lavanda btn-sm"><i data-lucide="plus" style="width:14px;height:14px"></i>Agregar Criterio</button>
+        <div id="criterios-warn" class="text-xs mt-2 font-bold hidden" style="color:#f87171"></div>
+        <div class="mt-3 flex items-center gap-3">
+         <label class="text-sm font-bold">Total de trabajos del periodo:</label> <input type="number" id="total-trabajos" min="1" max="50" value="15" class="w-20" onchange="updateTrabajos()">
+        </div>
+       </div>
+       <div class="card mb-4" id="cf-matrix">
+        <h3 class="font-bold mb-3">Matriz de Seguimiento</h3>
+        <div class="overflow-x-auto">
+         <table>
+          <thead id="matrix-head"></thead>
+          <tbody id="matrix-body"></tbody>
+         </table>
+        </div>
+       </div>
+       <div class="card mb-4">
+        <h3 class="font-bold mb-3">Calificación de Examen (0-10)</h3>
+        <div class="overflow-x-auto">
+         <table>
+          <thead>
+           <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Calificación</th>
+            <th>Ponderado</th>
+           </tr>
+          </thead>
+          <tbody id="tb-examen"></tbody>
+         </table>
+        </div>
+       </div>
+       <div class="card">
+        <h3 class="font-bold mb-3">Concentrado Final</h3>
+        <div class="overflow-x-auto">
+         <table>
+          <thead>
+           <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Trabajos %</th>
+            <th>Examen %</th>
+            <th>Total</th>
+            <th>Semáforo</th>
+           </tr>
+          </thead>
+          <tbody id="tb-concentrado"></tbody>
+         </table>
+        </div>
+       </div>
+      </section><!-- SISAT -->
+      <section id="sec-sisat" class="section-fade hidden">
+       <h2 class="text-xl font-black mb-4">Evaluación SISAT</h2>
+       <div class="flex flex-wrap items-end gap-4 mb-6">
+        <div><label class="text-xs font-bold block mb-2">Herramienta</label> <select id="sisat-herramienta" class="input-field" onchange="updateSisatTable()"> <option value="lectura">Lectura</option> <option value="textos">Textos escritos</option> <option value="calculo">Cálculo Mental</option> </select>
+        </div>
+        <div><label class="text-xs font-bold block mb-2">Momento</label> <select id="sisat-momento" class="input-field" onchange="updateSisatTable()"> <option value="1">Momento 1</option> <option value="2">Momento 2</option> <option value="3">Momento 3</option> </select>
+        </div><button onclick="exportSisatCSV()" class="btn btn-menta btn-sm"><i data-lucide="download" style="width:16px;height:16px"></i>Exportar</button>
+       </div>
+       <div class="card overflow-x-auto">
+        <table id="sisat-table" style="width:100%">
+         <thead id="sisat-thead"></thead>
+         <tbody id="sisat-tbody"></tbody>
+        </table>
+       </div>
+       <div class="card mt-4 p-4">
+        <h3 class="font-bold mb-3">Guía de Evaluación</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="sisat-rubrica"></div>
+       </div>
+      </section><!-- DASHBOARD -->
+      <section id="sec-dashboard" class="section-fade hidden">
+       <h2 class="text-xl font-black mb-4">Dashboard para CTE</h2>
+       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="card" id="dash-cf-chart">
+         <h3 class="font-bold mb-3">Promedios por Campo Formativo</h3>
+         <div id="dash-bars" style="height:220px" class="flex items-end justify-around gap-3 pt-4"></div>
+         <div id="dash-labels" class="flex justify-around gap-3 mt-2"></div>
+        </div>
+        <div class="card">
+         <h3 class="font-bold mb-3">Distribución SISAT</h3>
+         <div id="dash-sisat" style="height:220px" class="flex items-end justify-around gap-3 pt-4"></div>
+         <div id="dash-sisat-labels" class="flex justify-around gap-3 mt-2"></div>
+        </div>
+        <div class="card lg:col-span-2">
+         <h3 class="font-bold mb-3">Alumnos en Riesgo (Promedio &lt; 60)</h3>
+         <div id="dash-riesgo" class="space-y-2 text-sm max-h-60 overflow-y-auto"></div>
+        </div>
+       </div>
+      </section><!-- FICHAS DESCRIPTIVAS -->
+      <section id="sec-fichas" class="section-fade hidden">
+       <h2 class="text-xl font-black mb-4">Fichas Descriptivas</h2>
+       <div class="flex gap-3 mb-4"><select id="ficha-alumno" class="w-64"></select><button onclick="genFicha()" class="btn btn-lavanda btn-sm"><i data-lucide="file-text" style="width:16px;height:16px"></i>Generar</button>
+       </div>
+       <div id="ficha-output" class="card hidden"></div>
+      </section><!-- PORTAL PADRES -->
+      <section id="sec-padres" class="section-fade hidden">
+       <h2 class="text-xl font-black mb-4">Portal para Padres de Familia</h2>
+       <div class="flex flex-wrap gap-3 mb-4">
+        <select id="padre-alumno" class="w-64" onchange="renderPadreView()"></select>
+       </div>
+       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="padre-content">
+        <div class="card">
+         <h3 class="font-bold mb-3 flex items-center gap-2"><i data-lucide="clipboard" style="width:18px;height:18px;color:var(--rosa-d)"></i>Semáforo de Tareas</h3>
+         <div id="padre-tareas"></div>
+        </div>
+        <div class="card">
+         <h3 class="font-bold mb-3 flex items-center gap-2"><i data-lucide="award" style="width:18px;height:18px;color:var(--menta-d)"></i>Estatus Académico</h3>
+         <div id="padre-estatus"></div>
+        </div>
+        <div class="card lg:col-span-2">
+         <h3 class="font-bold mb-3 flex items-center gap-2"><i data-lucide="mail" style="width:18px;height:18px;color:var(--cielo-d)"></i>Buzón de Justificantes</h3>
+         <div class="flex gap-2 mb-3"><textarea id="just-text" rows="2" placeholder="Motivo del justificante médico..."></textarea><button onclick="sendJustificante()" class="btn btn-cielo btn-sm">Enviar</button>
+         </div>
+         <div id="justificantes-list" class="space-y-2 text-sm max-h-40 overflow-y-auto"></div>
+        </div>
+       </div>
+      </section><!-- CONFIG -->
+      <section id="sec-config" class="section-fade hidden">
+       <h2 class="text-xl font-black mb-4">Configuración</h2>
+       <div class="card mb-4">
+        <h3 class="font-bold mb-3">Importar Respaldo JSON</h3><input type="file" id="import-file" accept=".json" class="mb-2"> <button onclick="importBackup()" class="btn btn-cielo btn-sm"><i data-lucide="upload" style="width:16px;height:16px"></i>Importar</button>
+       </div>
+       <div class="card mb-4">
+        <h3 class="font-bold mb-3">Resetear Datos</h3>
+        <p class="text-sm mb-2" style="color:#999">Esto eliminará todos los datos almacenados.</p><button id="reset-btn" onclick="confirmReset()" class="btn btn-rosa btn-sm"><i data-lucide="trash-2" style="width:16px;height:16px"></i>Resetear</button>
+        <div id="reset-confirm" class="hidden mt-2 flex gap-2"><button onclick="doReset()" class="btn btn-rosa btn-sm">Sí, eliminar todo</button><button onclick="cancelReset()" class="btn btn-lavanda btn-sm">Cancelar</button>
+        </div>
+       </div>
+      </section>
+     </main>
+    </div>
+   </div>
+  </div><!-- MODAL CONTAINER -->
+  <div id="modal" class="hidden"></div>
+  <script>
+// ============================================================
+// SESSION & AUTH
+// ============================================================
+let currentUser=null; // {tipo:'maestra'|'padre', id:null|alumnoId}
+
+function doLogin(e){
+  e.preventDefault();
+  const user=document.getElementById('login-user').value.trim();
+  const pass=document.getElementById('login-pass').value;
+  const errEl=document.getElementById('login-error');
+  errEl.classList.add('hidden');
+
+  // MAESTRA
+  if(user==='maestra'&&pass==='1234'){
+    currentUser={tipo:'maestra',id:null};
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('main-app').classList.remove('hidden');
+    document.getElementById('sidebar').style.display='flex';
+    document.getElementById('main-content').style.maxWidth='';
+    document.getElementById('nav-padres').style.display='none';
+    initDB();renderInicio();initNavListeners();lucide.createIcons();
+    return;
+  }
+
+  // PADRES - alumnoN con passN
+  const match=user.match(/^alumno(\d+)$/);
+  if(match){
+    const alumnoNum=parseInt(match[1]);
+    if(alumnoNum>=1&&alumnoNum<=31&&pass===`pass${alumnoNum}`){
+      currentUser={tipo:'padre',id:alumnoNum};
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('main-app').classList.remove('hidden');
+      document.getElementById('sidebar').style.display='none';
+      document.getElementById('main-content').style.maxWidth='100%';
+      initDB();nav('padres');document.getElementById('padre-alumno').value=alumnoNum;renderPadreView();lucide.createIcons();
+      return;
+    }
+  }
+
+  errEl.textContent='❌ Usuario o contraseña incorrecta';
+  errEl.classList.remove('hidden');
+}
+
+function logout(){
+  currentUser=null;
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('main-app').classList.add('hidden');
+  document.getElementById('login-user').value='';
+  document.getElementById('login-pass').value='';
+  document.getElementById('sidebar').style.display='flex';
+  document.getElementById('main-content').style.maxWidth='';
+}
+
+// ============================================================
+// DATA LAYER - localStorage persistence
+// ============================================================
+
+// EDITAR NOMBRES DE ALUMNOS AQUÍ
+const DEFAULT_NAMES = [
+  "Sofía García","Mateo López","Valentina Hernández","Santiago Martínez","Camila Rodríguez",
+  "Sebastián Pérez","Regina González","Leonardo Díaz","María José Ramírez","Diego Torres",
+  "Ximena Flores","Emiliano Cruz","Renata Morales","Daniel Reyes","Isabella Jiménez",
+  "Alejandro Ruiz","Lucía Vargas","Andrés Mendoza","Natalia Castillo","Nicolás Ortega",
+  "Ana Paula Guzmán","Joaquín Rojas","Mariana Herrera","Samuel Medina","Fernanda Aguilar",
+  "Miguel Ángel Sánchez","Valeria Romero","Tomás Navarro","Gabriela Delgado","Emilio Fuentes",
+  "Paula Cervantes"
+];
+
+const CF_KEYS = ['lenguajes','saberes','etica','humano'];
+const CF_NAMES = ['Lenguajes','Saberes y Pensamiento Científico','Ética, Naturaleza y Sociedades','De lo Humano y lo Comunitario'];
+const CF_SHORT = ['Leng','Saberes','Ética','Humano'];
+const CF_COLORS = ['var(--rosa)','var(--lavanda)','var(--menta)','var(--cielo)'];
+
+function initDB(){
+  if(!localStorage.getItem('portal_alumnos')){
+    const als=DEFAULT_NAMES.map((n,i)=>({
+      id:i+1,nombre:n,usuario:'alumno'+(i+1),password:'1234',
+      asistencia:{fechas:[],faltas:0},
+      camposFormativos:{
+        lenguajes:{criterios:[{nombre:'Trabajos',peso:60},{nombre:'Examen',peso:30},{nombre:'Participación',peso:10}],trabajos:Array(15).fill(false),calExamen:0,promedioFinal:0},
+        saberes:{criterios:[{nombre:'Trabajos',peso:60},{nombre:'Examen',peso:30},{nombre:'Participación',peso:10}],trabajos:Array(15).fill(false),calExamen:0,promedioFinal:0},
+        etica:{criterios:[{nombre:'Trabajos',peso:60},{nombre:'Examen',peso:30},{nombre:'Participación',peso:10}],trabajos:Array(15).fill(false),calExamen:0,promedioFinal:0},
+        humano:{criterios:[{nombre:'Trabajos',peso:60},{nombre:'Examen',peso:30},{nombre:'Participación',peso:10}],trabajos:Array(15).fill(false),calExamen:0,promedioFinal:0}
+      },
+      sisat:{1:{lectura:Array(6).fill(null),escritura:Array(6).fill(null),calculo:Array(10).fill(null)},2:{lectura:Array(6).fill(null),escritura:Array(6).fill(null),calculo:Array(10).fill(null)},3:{lectura:Array(6).fill(null),escritura:Array(6).fill(null),calculo:Array(10).fill(null)}},
+      justificantes:[]
+    }));
+    localStorage.setItem('portal_alumnos',JSON.stringify(als));
+  }
+  if(!localStorage.getItem('portal_config')){
+    localStorage.setItem('portal_config',JSON.stringify({totalTrabajos:15}));
+  }
+}
+function getAlumnos(){return JSON.parse(localStorage.getItem('portal_alumnos')||'[]')}
+function saveAlumnos(a){localStorage.setItem('portal_alumnos',JSON.stringify(a))}
+function getConfig(){return JSON.parse(localStorage.getItem('portal_config')||'{}')}
+function saveConfig(c){localStorage.setItem('portal_config',JSON.stringify(c))}
+
+// ============================================================
+// NAVIGATION SPA
+// ============================================================
+let currentSection='inicio';
+function nav(sec){
+  // Validar acceso según tipo de usuario
+  if(currentUser.tipo==='padre'){
+    if(sec!=='padres')return; // Los papás solo ven Portal Padres
+  }
+  document.querySelectorAll('main>section').forEach(s=>s.classList.add('hidden'));
+  const el=document.getElementById('sec-'+sec);
+  if(el){el.classList.remove('hidden');el.classList.remove('section-fade');void el.offsetWidth;el.classList.add('section-fade')}
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector(`.nav-item[data-section="${sec}"]`)?.classList.add('active');
+  currentSection=sec;
+  closeSidebar();
+  renderSection(sec);
+}
+
+function initNavListeners(){
+  document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>nav(n.dataset.section)));
+}
+document.getElementById('menu-toggle').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('mobile-overlay').classList.toggle('hidden')});
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('mobile-overlay').classList.add('hidden')}
+
+function renderSection(sec){
+  if(sec==='inicio')renderInicio();
+  else if(sec==='alumnos')renderAlumnos();
+  else if(sec==='asistencia')renderAsistencia();
+  else if(sec==='calificaciones')renderCalificaciones();
+  else if(sec==='sisat')renderSisat();
+  else if(sec==='dashboard')renderDashboard();
+  else if(sec==='fichas')renderFichas();
+  else if(sec==='padres')renderPadres();
+}
+
+// ============================================================
+// CLOCK
+// ============================================================
+function updateClock(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short'})+' '+d.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})}
+setInterval(updateClock,30000);updateClock();
+
+// ============================================================
+// INICIO
+// ============================================================
+function renderInicio(){
+  const als=getAlumnos();
+  document.getElementById('stat-total').textContent=als.length;
+  const today=new Date().toISOString().split('T')[0];
+  const asistHoy=als.filter(a=>a.asistencia.fechas.includes(today)).length;
+  document.getElementById('stat-asist').textContent=asistHoy;
+  // promedio general
+  const proms=als.map(a=>{const cfs=CF_KEYS.map(k=>a.camposFormativos[k].promedioFinal);return cfs.reduce((s,v)=>s+v,0)/4});
+  const gral=proms.reduce((s,v)=>s+v,0)/als.length;
+  document.getElementById('stat-prom').textContent=gral>0?gral.toFixed(1):'--';
+  // sisat promedio
+  const sisatVals=als.map(a=>{const m=a.sisat['1'];return(m.lectura+m.escritura+m.calculo)});
+  const sisatAvg=sisatVals.reduce((s,v)=>s+v,0)/als.length;
+  document.getElementById('stat-sisat').textContent=sisatAvg>0?sisatAvg.toFixed(1):'--';
+  // chart
+  const chartC=document.getElementById('chart-home');
+  const labelsC=document.getElementById('chart-home-labels');
+  chartC.innerHTML='';labelsC.innerHTML='';
+  CF_KEYS.forEach((k,i)=>{
+    const avg=als.reduce((s,a)=>s+a.camposFormativos[k].promedioFinal,0)/als.length;
+    const h=Math.max(avg*2,4);
+    chartC.innerHTML+=`<div class="chart-bar" style="height:${h}px;width:36px;background:${CF_COLORS[i]}"></div>`;
+    labelsC.innerHTML+=`<div class="text-center"><div class="text-xs font-bold">${avg.toFixed(1)}</div><div style="font-size:.65rem;color:#999">${CF_SHORT[i]}</div></div>`;
+  });
+  // alerts
+  const alertsEl=document.getElementById('alerts-home');
+  alertsEl.innerHTML='';
+  const riesgo=als.filter(a=>{const p=CF_KEYS.map(k=>a.camposFormativos[k].promedioFinal);return p.some(v=>v>0&&v<60)});
+  if(riesgo.length===0)alertsEl.innerHTML='<div style="color:#999">Sin alertas activas ✨</div>';
+  else riesgo.slice(0,8).forEach(a=>{alertsEl.innerHTML+=`<div class="flex items-center gap-2 p-2 rounded-xl" style="background:rgba(248,113,113,.1)"><span class="semaph semaph-r"></span><span class="font-semibold">${a.nombre}</span> - Bajo rendimiento</div>`});
+}
+
+// ============================================================
+// ALUMNOS
+// ============================================================
+function renderAlumnos(){
+  const als=getAlumnos();
+  const q=(document.getElementById('search-al').value||'').toLowerCase();
+  const tb=document.getElementById('tb-alumnos');
+  tb.innerHTML='';
+  als.filter(a=>a.nombre.toLowerCase().includes(q)).forEach((a,i)=>{
+    const prom=CF_KEYS.map(k=>a.camposFormativos[k].promedioFinal).reduce((s,v)=>s+v,0)/4;
+    tb.innerHTML+=`<tr>
+      <td>${a.id}</td><td class="text-left font-semibold">${a.nombre}</td><td>${a.usuario}</td>
+      <td>${a.asistencia.faltas}</td><td><span class="badge" style="background:${prom>=70?'var(--menta)':prom>=50?'#fef08a':'var(--rosa)'}">${prom>0?prom.toFixed(1):'--'}</span></td>
+      <td><button onclick="editAlumno(${a.id})" class="btn btn-lavanda btn-sm"><i data-lucide="edit" style="width:14px;height:14px"></i></button>
+      <button onclick="deleteAlumno(${a.id})" class="btn btn-rosa btn-sm ml-1"><i data-lucide="trash-2" style="width:14px;height:14px"></i></button></td>
+    </tr>`;
+  });
+  lucide.createIcons();
+}
+document.getElementById('search-al').addEventListener('input',()=>{if(currentSection==='alumnos')renderAlumnos()});
+
+function showAddAlumno(){
+  showModal(`<h3 class="font-bold text-lg mb-3">Agregar Alumno</h3>
+    <input id="m-nombre" placeholder="Nombre completo" class="mb-2">
+    <input id="m-user" placeholder="Usuario" class="mb-2">
+    <input id="m-pass" placeholder="Contraseña" class="mb-3">
+    <div class="flex gap-2"><button onclick="doAddAlumno()" class="btn btn-menta">Guardar</button><button onclick="closeModal()" class="btn btn-lavanda">Cancelar</button></div>`);
+}
+function doAddAlumno(){
+  const n=document.getElementById('m-nombre').value.trim();
+  if(!n)return;
+  const als=getAlumnos();const cfg=getConfig();const tt=cfg.totalTrabajos||15;
+  als.push({id:als.length+1,nombre:n,usuario:document.getElementById('m-user').value||'alumno'+(als.length+1),password:document.getElementById('m-pass').value||'1234',
+    asistencia:{fechas:[],faltas:0},
+    camposFormativos:Object.fromEntries(CF_KEYS.map(k=>[k,{criterios:[{nombre:'Trabajos',peso:60},{nombre:'Examen',peso:30},{nombre:'Participación',peso:10}],trabajos:Array(tt).fill(false),calExamen:0,promedioFinal:0}])),
+    sisat:{1:{lectura:0,escritura:0,calculo:0},2:{lectura:0,escritura:0,calculo:0},3:{lectura:0,escritura:0,calculo:0}},justificantes:[]});
+  saveAlumnos(als);closeModal();renderAlumnos();
+}
+function editAlumno(id){
+  const als=getAlumnos();const a=als.find(x=>x.id===id);if(!a)return;
+  showModal(`<h3 class="font-bold text-lg mb-3">Editar Alumno</h3>
+    <label class="text-xs font-bold">Nombre</label><input id="m-nombre" value="${a.nombre}" class="mb-2">
+    <label class="text-xs font-bold">Usuario</label><input id="m-user" value="${a.usuario}" class="mb-2">
+    <label class="text-xs font-bold">Contraseña</label><input id="m-pass" value="${a.password}" class="mb-3">
+    <div class="flex gap-2"><button onclick="doEditAlumno(${id})" class="btn btn-menta">Guardar</button><button onclick="closeModal()" class="btn btn-lavanda">Cancelar</button></div>`);
+}
+function doEditAlumno(id){
+  const als=getAlumnos();const a=als.find(x=>x.id===id);if(!a)return;
+  a.nombre=document.getElementById('m-nombre').value.trim()||a.nombre;
+  a.usuario=document.getElementById('m-user').value.trim()||a.usuario;
+  a.password=document.getElementById('m-pass').value||a.password;
+  saveAlumnos(als);closeModal();renderAlumnos();
+}
+let pendingDeleteId=null;
+function deleteAlumno(id){
+  const als=getAlumnos();const a=als.find(x=>x.id===id);if(!a)return;
+  showModal(`<h3 class="font-bold text-lg mb-3">¿Eliminar alumno?</h3><p class="mb-4">${a.nombre}</p>
+    <div class="flex gap-2"><button onclick="doDeleteAlumno(${id})" class="btn btn-rosa">Sí, eliminar</button><button onclick="closeModal()" class="btn btn-lavanda">Cancelar</button></div>`);
+}
+function doDeleteAlumno(id){
+  let als=getAlumnos();als=als.filter(x=>x.id!==id);als.forEach((a,i)=>a.id=i+1);
+  saveAlumnos(als);closeModal();renderAlumnos();
+}
+
+// ============================================================
+// ASISTENCIA
+// ============================================================
+function renderAsistencia(){
+  const als=getAlumnos();const tb=document.getElementById('tb-asist');
+  document.getElementById('asist-fecha').value=new Date().toISOString().split('T')[0];
+  tb.innerHTML='';
+  const today=document.getElementById('asist-fecha').value;
+  als.forEach(a=>{
+    const checked=a.asistencia.fechas.includes(today);
+    tb.innerHTML+=`<tr><td>${a.id}</td><td class="text-left font-semibold">${a.nombre}</td>
+      <td><div class="check-mark ${checked?'checked':''}" data-aid="${a.id}" onclick="toggleAsist(this)">✓</div></td>
+      <td>${a.asistencia.faltas}</td></tr>`;
+  });
+}
+document.getElementById('asist-fecha').addEventListener('change',renderAsistencia);
+function toggleAsist(el){el.classList.toggle('checked')}
+function saveAsistencia(){
+  const fecha=document.getElementById('asist-fecha').value;if(!fecha)return;
+  const als=getAlumnos();
+  document.querySelectorAll('#tb-asist .check-mark').forEach(el=>{
+    const id=parseInt(el.dataset.aid);const a=als.find(x=>x.id===id);if(!a)return;
+    const wasPresent=a.asistencia.fechas.includes(fecha);
+    const isChecked=el.classList.contains('checked');
+    if(isChecked&&!wasPresent)a.asistencia.fechas.push(fecha);
+    else if(!isChecked&&wasPresent){a.asistencia.fechas=a.asistencia.fechas.filter(f=>f!==fecha);a.asistencia.faltas++}
+    else if(!isChecked&&!wasPresent){if(!a.asistencia.fechas.includes('F:'+fecha)){a.asistencia.faltas++}}
+  });
+  saveAlumnos(als);
+  showToast('Asistencia guardada ✓');
+  renderAsistencia();
+}
+
+// ============================================================
+// CALIFICACIONES
+// ============================================================
+let activeCF=0;
+function renderCalificaciones(){
+  const tabs=document.getElementById('cf-tabs');tabs.innerHTML='';
+  CF_NAMES.forEach((n,i)=>{tabs.innerHTML+=`<button class="tab-btn ${i===activeCF?'active':''}" onclick="setCF(${i},this)">${n}</button>`});
+  renderCriterios();renderMatrix();renderExamen();renderConcentrado();
+}
+function setCF(i,btn){activeCF=i;document.querySelectorAll('#cf-tabs .tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderCriterios();renderMatrix();renderExamen();renderConcentrado()}
+
+function renderCriterios(){
+  const als=getAlumnos();if(!als.length)return;
+  const cf=als[0].camposFormativos[CF_KEYS[activeCF]];
+  const list=document.getElementById('criterios-list');list.innerHTML='';
+  cf.criterios.forEach((c,i)=>{
+    list.innerHTML+=`<div class="flex items-center gap-2"><input value="${c.nombre}" onchange="updateCriterioName(${i},this.value)" class="flex-1"><input type="number" value="${c.peso}" min="0" max="100" class="w-20" onchange="updateCriterioPeso(${i},this.value)"><span class="text-sm font-bold">%</span>${cf.criterios.length>1?`<button onclick="removeCriterio(${i})" class="btn btn-rosa btn-sm">×</button>`:''}</div>`;
+  });
+  validateCriterios();
+}
+function addCriterio(){
+  const als=getAlumnos();
+  als.forEach(a=>{a.camposFormativos[CF_KEYS[activeCF]].criterios.push({nombre:'Nuevo',peso:0})});
+  saveAlumnos(als);renderCriterios();
+}
+function removeCriterio(i){
+  const als=getAlumnos();als.forEach(a=>a.camposFormativos[CF_KEYS[activeCF]].criterios.splice(i,1));
+  saveAlumnos(als);renderCriterios();
+}
+function updateCriterioName(i,v){const als=getAlumnos();als.forEach(a=>a.camposFormativos[CF_KEYS[activeCF]].criterios[i].nombre=v);saveAlumnos(als)}
+function updateCriterioPeso(i,v){const als=getAlumnos();als.forEach(a=>a.camposFormativos[CF_KEYS[activeCF]].criterios[i].peso=parseInt(v)||0);saveAlumnos(als);validateCriterios()}
+function validateCriterios(){
+  const als=getAlumnos();if(!als.length)return;
+  const sum=als[0].camposFormativos[CF_KEYS[activeCF]].criterios.reduce((s,c)=>s+c.peso,0);
+  const warn=document.getElementById('criterios-warn');
+  if(sum!==100){warn.textContent=`⚠ La suma es ${sum}%. Debe ser 100%.`;warn.classList.remove('hidden')}
+  else{warn.classList.add('hidden')}
+}
+
+function updateTrabajos(){
+  const n=parseInt(document.getElementById('total-trabajos').value)||15;
+  const cfg=getConfig();cfg.totalTrabajos=n;saveConfig(cfg);
+  const als=getAlumnos();
+  als.forEach(a=>{CF_KEYS.forEach(k=>{
+    const old=a.camposFormativos[k].trabajos;
+    if(old.length<n)a.camposFormativos[k].trabajos=[...old,...Array(n-old.length).fill(false)];
+    else a.camposFormativos[k].trabajos=old.slice(0,n);
+  })});
+  saveAlumnos(als);renderMatrix();
+}
+
+function renderMatrix(){
+  const als=getAlumnos();const cfg=getConfig();const tt=cfg.totalTrabajos||15;
+  const head=document.getElementById('matrix-head');
+  const body=document.getElementById('matrix-body');
+  head.innerHTML=`<tr><th>#</th><th>Nombre</th>${Array.from({length:tt},(_,i)=>`<th>T${i+1}</th>`).join('')}<th>%</th></tr>`;
+  body.innerHTML='';
+  als.forEach(a=>{
+    const t=a.camposFormativos[CF_KEYS[activeCF]].trabajos;
+    const entregados=t.filter(Boolean).length;
+    const pct=tt>0?((entregados/tt)*100).toFixed(1):0;
+    body.innerHTML+=`<tr><td>${a.id}</td><td class="text-left font-semibold text-xs">${a.nombre}</td>
+      ${t.map((v,j)=>`<td><div class="check-mark ${v?'checked':''}" onclick="toggleTrabajo(${a.id},${j},this)">✓</div></td>`).join('')}
+      <td class="font-bold">${pct}</td></tr>`;
+  });
+}
+function toggleTrabajo(aid,ti,el){
+  const als=getAlumnos();const a=als.find(x=>x.id===aid);if(!a)return;
+  a.camposFormativos[CF_KEYS[activeCF]].trabajos[ti]=!a.camposFormativos[CF_KEYS[activeCF]].trabajos[ti];
+  el.classList.toggle('checked');
+  recalcPromedios(als);saveAlumnos(als);
+  // update percentage inline
+  const tr=el.closest('tr');const tds=tr.querySelectorAll('td');
+  const t=a.camposFormativos[CF_KEYS[activeCF]].trabajos;
+  const pct=t.length>0?((t.filter(Boolean).length/t.length)*100).toFixed(1):0;
+  tds[tds.length-1].textContent=pct;
+  renderConcentrado();
+}
+
+function renderExamen(){
+  const als=getAlumnos();const tb=document.getElementById('tb-examen');tb.innerHTML='';
+  als.forEach(a=>{
+    const cf=a.camposFormativos[CF_KEYS[activeCF]];
+    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'))?.peso||30;
+    const pond=((cf.calExamen/10)*exPeso).toFixed(1);
+    tb.innerHTML+=`<tr><td>${a.id}</td><td class="text-left font-semibold">${a.nombre}</td>
+      <td><input type="number" min="0" max="10" step="0.1" value="${cf.calExamen}" class="w-20 text-center" onchange="setExamen(${a.id},this.value)"></td>
+      <td class="font-bold">${pond}</td></tr>`;
+  });
+}
+function setExamen(aid,val){
+  const als=getAlumnos();const a=als.find(x=>x.id===aid);if(!a)return;
+  a.camposFormativos[CF_KEYS[activeCF]].calExamen=parseFloat(val)||0;
+  recalcPromedios(als);saveAlumnos(als);renderExamen();renderConcentrado();
+}
+
+function recalcPromedios(als){
+  const cfg=getConfig();const tt=cfg.totalTrabajos||15;
+  als.forEach(a=>{CF_KEYS.forEach(k=>{
+    const cf=a.camposFormativos[k];
+    const entregados=cf.trabajos.filter(Boolean).length;
+    const pctTrab=tt>0?(entregados/tt)*100:0;
+    const trabPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('trabajo'))?.peso||60;
+    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'))?.peso||30;
+    const partPeso=cf.criterios.reduce((s,c)=>s+c.peso,0)-trabPeso-exPeso;
+    const trabScore=(pctTrab/100)*trabPeso;
+    const exScore=(cf.calExamen/10)*exPeso;
+    const partScore=partPeso>0?(partPeso*0.8):0; // default 80% participation
+    cf.promedioFinal=Math.min(100,trabScore+exScore+partScore);
+  })});
+}
+
+function renderConcentrado(){
+  const als=getAlumnos();const tb=document.getElementById('tb-concentrado');tb.innerHTML='';
+  const cfg=getConfig();const tt=cfg.totalTrabajos||15;
+  als.forEach(a=>{
+    const cf=a.camposFormativos[CF_KEYS[activeCF]];
+    const entregados=cf.trabajos.filter(Boolean).length;
+    const pctTrab=tt>0?((entregados/tt)*100).toFixed(1):0;
+    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'))?.peso||30;
+    const exPond=((cf.calExamen/10)*exPeso).toFixed(1);
+    const total=cf.promedioFinal.toFixed(1);
+    const semColor=total>=70?'semaph-v':total>=50?'semaph-a':'semaph-r';
+    tb.innerHTML+=`<tr><td>${a.id}</td><td class="text-left font-semibold">${a.nombre}</td><td>${pctTrab}</td><td>${exPond}</td><td class="font-bold">${total}</td><td><span class="semaph ${semColor}"></span></td></tr>`;
+  });
+}
+
+// ============================================================
+// SISAT - Enhanced with Multiple Tools (Lectura, Textos, Cálculo)
+// ============================================================
+
+const SISAT_TOOLS={
+  lectura:{name:'Lectura',reactivos:6,opciones:['1','2','3'],rubricas:{
+    1:'I. Fluidez: Velocidad y ritmo de lectura',
+    2:'II. Precisión: Exactitud en la decodificación',
+    3:'III. Expresión: Entonación y naturalidad',
+    4:'IV. Comprensión: Ideas principales',
+    5:'V. Detalles: Información específica',
+    6:'VI. Inferencia: Conclusiones del lector'
+  },thresholds:{red:3,yellow:6}},
+  textos:{name:'Textos escritos',reactivos:6,opciones:['1','2','3'],rubricas:{
+    1:'I. Legibilidad: Trazo claro',
+    2:'II. Ortografía: Reglas de escritura',
+    3:'III. Segmentación: Separación de palabras',
+    4:'IV. Estructura: Inicio, desarrollo, cierre',
+    5:'V. Coherencia: Ideas relacionadas',
+    6:'VI. Cohesión: Conectores y conectivas'
+  },thresholds:{red:3,yellow:6}},
+  calculo:{name:'Cálculo Mental',reactivos:10,opciones:['0','1','1V'],rubricas:{
+    1:'R1: Operación mental',2:'R2: Operación mental',3:'R3: Operación mental',4:'R4: Operación mental',5:'R5: Operación mental',
+    6:'R6: Operación mental',7:'R7: Operación mental',8:'R8: Operación mental',9:'R9: Operación mental',10:'R10: Operación mental'
+  },thresholds:{red:3,yellow:6}}
+};
+
+function updateSisatTable(){
+  const herramienta=document.getElementById('sisat-herramienta').value;
+  const momento=document.getElementById('sisat-momento').value;
+  const tool=SISAT_TOOLS[herramienta];
+  const als=getAlumnos();
+  
+  // Encabezado
+  const thead=document.getElementById('sisat-thead');
+  let headerHTML=`<tr><th>#</th><th>Alumno</th>`;
+  for(let i=1;i<=tool.reactivos;i++){
+    headerHTML+=`<th title="${tool.rubricas[i]}">${i}</th>`;
+  }
+  headerHTML+=`<th>Total</th><th>Nivel</th></tr>`;
+  thead.innerHTML=headerHTML;
+  
+  // Cuerpo
+  const tbody=document.getElementById('sisat-tbody');
+  tbody.innerHTML='';
+  als.forEach(a=>{
+    if(!a.sisat[momento])a.sisat[momento]={lectura:Array(6).fill(null),escritura:Array(6).fill(null),calculo:Array(10).fill(null)};
+    const vals=a.sisat[momento][herramienta]||Array(tool.reactivos).fill('');
+    
+    // Calcular total
+    let total=0;
+    if(herramienta==='calculo'){
+      vals.forEach(v=>{if(v==='1'||v==='1V')total+=1});
+    }else{
+      vals.forEach(v=>{total+=parseInt(v)||0});
+    }
+    
+    // Determinar nivel
+    const nivel=total>tool.thresholds.yellow?'🟢 Esperado':total>tool.thresholds.red?'🟡 En desarrollo':'🔴 Requiere apoyo';
+    const levelColor=total>tool.thresholds.yellow?'var(--menta)':total>tool.thresholds.red?'#fef08a':'var(--rosa)';
+    
+    let rowHTML=`<tr><td>${a.id}</td><td class="text-left font-semibold text-xs">${a.nombre}</td>`;
+    vals.forEach((v,i)=>{
+      let cellColor='#f5f5f5';
+      if(herramienta==='calculo'){
+        if(v==='1'||v==='1V')cellColor='#dcfce7';
+        else if(v==='0')cellColor='#fee2e2';
+      }else{
+        if(v==='3')cellColor='#dcfce7';
+        else if(v==='2')cellColor='#fef9c3';
+        else if(v==='1')cellColor='#fee2e2';
+      }
+      rowHTML+=`<td style="background:${cellColor};text-align:center;font-weight:bold;cursor:pointer;" onclick="cycleSisatVal(${a.id},'${herramienta}',${i},'${momento}')">${v||'−'}</td>`;
+    });
+    rowHTML+=`<td class="font-bold text-center">${total}</td><td style="color:${levelColor};font-weight:bold;text-align:center;font-size:.75rem">${nivel}</td></tr>`;
+    tbody.innerHTML+=rowHTML;
+  });
+  
+  // Guía
+  const rubricaDiv=document.getElementById('sisat-rubrica');
+  rubricaDiv.innerHTML='';
+  Object.entries(tool.rubricas).forEach(([idx,desc])=>{
+    const num=parseInt(idx);
+    const bgColor=herramienta==='calculo'?'rgba(174,198,207,.15)':herramienta==='lectura'?'rgba(255,209,220,.15)':'rgba(178,242,187,.15)';
+    rubricaDiv.innerHTML+=`<div class="p-3 rounded-xl text-xs" style="background:${bgColor};border:1px solid rgba(0,0,0,.1)"><strong>${num}.</strong> ${desc}</div>`;
+  });
+  
+  lucide.createIcons();
+}
+
+function cycleSisatVal(aid,herramienta,idx,momento){
+  const als=getAlumnos();const a=als.find(x=>x.id===aid);if(!a)return;
+  if(!a.sisat[momento])a.sisat[momento]={lectura:Array(6).fill(null),escritura:Array(6).fill(null),calculo:Array(10).fill(null)};
+  
+  const tool=SISAT_TOOLS[herramienta];
+  const opciones=tool.opciones;
+  const arr=a.sisat[momento][herramienta]||Array(tool.reactivos).fill('');
+  
+  let currentVal=arr[idx]||'';
+  let currentIdx=opciones.indexOf(currentVal);
+  let nextVal=currentIdx===-1?opciones[0]:(currentIdx===opciones.length-1?'':opciones[currentIdx+1]);
+  
+  arr[idx]=nextVal;
+  a.sisat[momento][herramienta]=arr;
+  saveAlumnos(als);updateSisatTable();showToast('SISAT guardado ✓');
+}
+
+function renderSisat(){
+  updateSisatTable();
+}
+
+function exportSisatCSV(){
+  const herramienta=document.getElementById('sisat-herramienta').value;
+  const momento=document.getElementById('sisat-momento').value;
+  const tool=SISAT_TOOLS[herramienta];
+  const als=getAlumnos();
+  
+  let csv=`#,Alumno,${Array.from({length:tool.reactivos},(_,i)=>i+1).join(',')},Total,Nivel\n`;
+  als.forEach((a,i)=>{
+    if(!a.sisat[momento])a.sisat[momento]={lectura:Array(6).fill(null),escritura:Array(6).fill(null),calculo:Array(10).fill(null)};
+    const vals=a.sisat[momento][herramienta]||Array(tool.reactivos).fill('');
+    let total=0;
+    if(herramienta==='calculo'){
+      vals.forEach(v=>{if(v==='1'||v==='1V')total+=1});
+    }else{
+      vals.forEach(v=>{total+=parseInt(v)||0});
+    }
+    const nivel=total>tool.thresholds.yellow?'Esperado':total>tool.thresholds.red?'En desarrollo':'Requiere apoyo';
+    csv+=`${a.id},"${a.nombre}",${vals.map(v=>v||'').join(',')},${total},${nivel}\n`;
+  });
+  
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement('a');
+  link.href=url;
+  link.download=`SISAT_${herramienta}_M${momento}.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
+  showToast('CSV descargado ✓');
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function renderDashboard(){
+  const als=getAlumnos();
+  recalcPromedios(als);saveAlumnos(als);
+  // CF bars
+  const db=document.getElementById('dash-bars');const dl=document.getElementById('dash-labels');
+  db.innerHTML='';dl.innerHTML='';
+  CF_KEYS.forEach((k,i)=>{
+    const avg=als.reduce((s,a)=>s+a.camposFormativos[k].promedioFinal,0)/als.length;
+    const h=Math.max(avg*2,6);
+    db.innerHTML+=`<div class="chart-bar" style="height:${h}px;width:44px;background:${CF_COLORS[i]}"></div>`;
+    dl.innerHTML+=`<div class="text-center"><div class="text-sm font-bold">${avg.toFixed(1)}</div><div style="font-size:.65rem;color:#999">${CF_SHORT[i]}</div></div>`;
+  });
+  // SISAT distribution
+  const ds=document.getElementById('dash-sisat');const dsl=document.getElementById('dash-sisat-labels');
+  ds.innerHTML='';dsl.innerHTML='';
+  let counts={verde:0,amarillo:0,rojo:0};
+  als.forEach(a=>{
+    const s=a.sisat['1'];
+    const calcNivel=(arr)=>{const sum=arr.filter(v=>v===1).length+arr.filter(v=>v===0.5).length*0.5;return sum===3?3:sum>=2?2:1};
+    const nivLec=calcNivel(s.lectura||[0,0,0]);
+    const nivEsc=calcNivel(s.escritura||[0,0,0]);
+    const nivCalc=calcNivel(s.calculo||[0,0,0]);
+    const t=nivLec+nivEsc+nivCalc;
+    if(t>=8)counts.verde++;else if(t>=5)counts.amarillo++;else counts.rojo++;
+  });
+  [{l:'Verde',c:'#4ade80',v:counts.verde},{l:'Amarillo',c:'#facc15',v:counts.amarillo},{l:'Rojo',c:'#f87171',v:counts.rojo}].forEach(x=>{
+    const h=Math.max(x.v*8,4);
+    ds.innerHTML+=`<div class="chart-bar" style="height:${h}px;width:50px;background:${x.c}"></div>`;
+    dsl.innerHTML+=`<div class="text-center"><div class="text-sm font-bold">${x.v}</div><div style="font-size:.65rem;color:#999">${x.l}</div></div>`;
+  });
+  // riesgo
+  const riesgoEl=document.getElementById('dash-riesgo');riesgoEl.innerHTML='';
+  const riesgo=als.filter(a=>{const p=CF_KEYS.map(k=>a.camposFormativos[k].promedioFinal);const avg=p.reduce((s,v)=>s+v,0)/4;return avg>0&&avg<60});
+  if(!riesgo.length)riesgoEl.innerHTML='<div style="color:#999">Todos los alumnos están por encima de 60 puntos ✨</div>';
+  else riesgo.forEach(a=>{
+    const avg=(CF_KEYS.map(k=>a.camposFormativos[k].promedioFinal).reduce((s,v)=>s+v,0)/4).toFixed(1);
+    riesgoEl.innerHTML+=`<div class="flex items-center justify-between p-2 rounded-xl" style="background:rgba(248,113,113,.08)">
+      <span class="font-semibold">${a.nombre}</span><span class="badge" style="background:var(--rosa)">${avg} pts</span></div>`;
+  });
+}
+
+// ============================================================
+// FICHAS DESCRIPTIVAS
+// ============================================================
+function renderFichas(){
+  const als=getAlumnos();const sel=document.getElementById('ficha-alumno');
+  sel.innerHTML=als.map(a=>`<option value="${a.id}">${a.nombre}</option>`).join('');
+}
+function genFicha(){
+  const als=getAlumnos();const id=parseInt(document.getElementById('ficha-alumno').value);
+  const a=als.find(x=>x.id===id);if(!a)return;
+  recalcPromedios(als);saveAlumnos(als);
+  const out=document.getElementById('ficha-output');out.classList.remove('hidden');
+  const cfData=CF_KEYS.map((k,i)=>{
+    const cf=a.camposFormativos[k];
+    const nivel=cf.promedioFinal>=80?'Destacado':cf.promedioFinal>=60?'Satisfactorio':cf.promedioFinal>=40?'En desarrollo':'Requiere apoyo';
+    return`<div class="mb-3"><h4 class="font-bold text-sm" style="color:${CF_COLORS[i].replace('var(--','').replace(')','')}">${CF_NAMES[i]}</h4>
+      <div class="flex items-center gap-2"><span class="badge" style="background:${cf.promedioFinal>=70?'var(--menta)':cf.promedioFinal>=50?'#fef08a':'var(--rosa)'}">${cf.promedioFinal.toFixed(1)} pts - ${nivel}</span></div>
+      <p class="text-xs mt-1" style="color:#777">Trabajos entregados: ${cf.trabajos.filter(Boolean).length}/${cf.trabajos.length} · Examen: ${cf.calExamen}/10</p></div>`;
+  }).join('');
+  const s=a.sisat['1'];
+  const calcNivel=(arr)=>{const sum=arr.filter(v=>v===1).length+arr.filter(v=>v===0.5).length*0.5;return sum===3?3:sum>=2?2:1};
+  const nivLec=calcNivel(s.lectura||[0,0,0]);
+  const nivEsc=calcNivel(s.escritura||[0,0,0]);
+  const nivCalc=calcNivel(s.calculo||[0,0,0]);
+  const sisatTotal=nivLec+nivEsc+nivCalc;
+  const fortalezas=[];const areas=[];
+  CF_KEYS.forEach((k,i)=>{if(a.camposFormativos[k].promedioFinal>=70)fortalezas.push(CF_NAMES[i]);else if(a.camposFormativos[k].promedioFinal<60)areas.push(CF_NAMES[i])});
+
+  out.innerHTML=`<div class="border-b pb-3 mb-3" style="border-color:var(--lavanda)">
+    <h3 class="font-black text-lg">📋 Ficha Descriptiva</h3>
+    <p class="font-bold">${a.nombre}</p><p class="text-xs" style="color:#999">ID: ${a.id} · Faltas: ${a.asistencia.faltas}</p></div>
+    <div class="mb-4"><h4 class="font-bold mb-2">Campos Formativos</h4>${cfData}</div>
+    <div class="mb-4"><h4 class="font-bold mb-2">SISAT Momento 1</h4>
+      <div class="flex gap-3 text-sm"><span>Lectura: ${nivLec}/3</span><span>Escritura: ${nivEsc}/3</span><span>Cálculo: ${nivCalc}/3</span><span class="font-bold">Total: ${sisatTotal}/9</span></div></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div class="p-3 rounded-xl" style="background:rgba(178,242,187,.15)"><h4 class="font-bold text-sm mb-1">✅ Fortalezas</h4><p class="text-xs">${fortalezas.length?fortalezas.join(', '):'Aún sin datos suficientes'}</p></div>
+      <div class="p-3 rounded-xl" style="background:rgba(255,209,220,.15)"><h4 class="font-bold text-sm mb-1">📌 Áreas de Oportunidad</h4><p class="text-xs">${areas.length?areas.join(', '):'Sin áreas críticas detectadas'}</p></div>
+    </div>`;
+}
+
+// ============================================================
+// PORTAL PADRES
+// ============================================================
+function renderPadres(){
+  const als=getAlumnos();
+  const sel=document.getElementById('padre-alumno');
+  // Papás solo ven su hijo/a
+  if(currentUser.tipo==='padre'){
+    const hijo=als.find(x=>x.id===currentUser.id);
+    if(hijo){
+      sel.innerHTML=`<option value="${hijo.id}">${hijo.nombre}</option>`;
+      sel.disabled=true;
+    }
+  }else{
+    sel.innerHTML=als.map(a=>`<option value="${a.id}">${a.nombre}</option>`).join('');
+    sel.disabled=false;
+  }
+  renderPadreView();
+}
+function renderPadreView(){
+  const als=getAlumnos();
+  let id;
+  if(currentUser.tipo==='padre'){
+    id=currentUser.id; // Papá ve solo su hijo/a
+  }else{
+    id=parseInt(document.getElementById('padre-alumno').value);
+  }
+  const a=als.find(x=>x.id===id);if(!a)return;
+  const cfg=getConfig();const tt=cfg.totalTrabajos||15;
+  recalcPromedios(als);
+  // tareas
+  const tareas=document.getElementById('padre-tareas');tareas.innerHTML='';
+  CF_KEYS.forEach((k,i)=>{
+    const cf=a.camposFormativos[k];
+    const pendientes=cf.trabajos.map((v,j)=>v?null:j+1).filter(Boolean);
+    const semColor=pendientes.length===0?'semaph-v':pendientes.length<=3?'semaph-a':'semaph-r';
+    tareas.innerHTML+=`<div class="flex items-center justify-between p-2 rounded-xl mb-2" style="background:rgba(230,230,250,.2)">
+      <div><span class="font-semibold text-sm">${CF_SHORT[i]}</span><div class="text-xs" style="color:#999">${pendientes.length?'Pendientes: T'+pendientes.join(', T'):'✓ Todo entregado'}</div></div>
+      <span class="semaph ${semColor}"></span></div>`;
+  });
+  // estatus
+  const est=document.getElementById('padre-estatus');est.innerHTML='';
+  CF_KEYS.forEach((k,i)=>{
+    const cf=a.camposFormativos[k];
+    est.innerHTML+=`<div class="mb-3"><div class="flex justify-between text-sm font-semibold"><span>${CF_SHORT[i]}</span><span>${cf.promedioFinal.toFixed(1)}/100</span></div>
+      <div class="w-full rounded-full h-3 mt-1" style="background:var(--lavanda)"><div class="h-3 rounded-full" style="width:${cf.promedioFinal}%;background:${CF_COLORS[i]};transition:width .5s"></div></div></div>`;
+  });
+  // justificantes
+  renderJustificantes(a);
+}
+function sendJustificante(){
+  const text=document.getElementById('just-text').value.trim();if(!text)return;
+  const id=parseInt(document.getElementById('padre-alumno').value);
+  const als=getAlumnos();const a=als.find(x=>x.id===id);if(!a)return;
+  a.justificantes.push({texto:text,fecha:new Date().toISOString().split('T')[0],aprobado:false});
+  saveAlumnos(als);document.getElementById('just-text').value='';renderJustificantes(a);
+  showToast('Justificante enviado ✓');
+}
+function renderJustificantes(a){
+  const list=document.getElementById('justificantes-list');list.innerHTML='';
+  if(!a.justificantes.length){list.innerHTML='<div style="color:#999">Sin justificantes enviados</div>';return}
+  a.justificantes.forEach((j,i)=>{
+    list.innerHTML+=`<div class="flex items-center justify-between p-2 rounded-xl" style="background:rgba(230,230,250,.15)">
+      <div><div class="text-xs font-bold">${j.fecha}</div><div class="text-xs">${j.texto}</div></div>
+      <div class="flex items-center gap-2">
+        <span class="badge" style="background:${j.aprobado?'var(--menta)':'#fef08a'}">${j.aprobado?'Aprobado':'Pendiente'}</span>
+        ${!j.aprobado?`<button onclick="aprobarJust(${a.id},${i})" class="btn btn-menta btn-sm">✓</button>`:''}
+      </div></div>`;
+  });
+}
+function aprobarJust(aid,ji){
+  const als=getAlumnos();const a=als.find(x=>x.id===aid);if(!a)return;
+  a.justificantes[ji].aprobado=true;saveAlumnos(als);renderJustificantes(a);
+}
+
+// ============================================================
+// MODAL & TOAST
+// ============================================================
+function showModal(html){document.getElementById('modal').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-box">${html}</div></div>`;document.getElementById('modal').classList.remove('hidden');lucide.createIcons()}
+function closeModal(){document.getElementById('modal').classList.add('hidden');document.getElementById('modal').innerHTML=''}
+
+let toastTimer;
+function showToast(msg){
+  let t=document.getElementById('toast');
+  if(!t){t=document.createElement('div');t.id='toast';t.style.cssText='position:fixed;bottom:24px;right:24px;padding:12px 24px;border-radius:16px;background:#3d3154;color:#fff;font-weight:700;font-size:.9rem;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.15);transition:opacity .3s;font-family:inherit';document.body.appendChild(t)}
+  t.textContent=msg;t.style.opacity='1';clearTimeout(toastTimer);toastTimer=setTimeout(()=>{t.style.opacity='0'},2500);
+}
+
+// ============================================================
+// EXPORT / IMPORT
+// ============================================================
+function exportBackup(){
+  const data={alumnos:getAlumnos(),config:getConfig(),exportDate:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`portal_escolar_respaldo_${new Date().toISOString().split('T')[0]}.json`;a.click();URL.revokeObjectURL(a.href);
+  showToast('Respaldo descargado ✓');
+}
+function importBackup(){
+  const f=document.getElementById('import-file').files[0];if(!f)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(data.alumnos){localStorage.setItem('portal_alumnos',JSON.stringify(data.alumnos));if(data.config)localStorage.setItem('portal_config',JSON.stringify(data.config));showToast('Respaldo importado ✓');nav('inicio')}
+    }catch(err){showToast('Error: archivo inválido')}
+  };reader.readAsText(f);
+}
+function confirmReset(){document.getElementById('reset-btn').classList.add('hidden');document.getElementById('reset-confirm').classList.remove('hidden')}
+function cancelReset(){document.getElementById('reset-btn').classList.remove('hidden');document.getElementById('reset-confirm').classList.add('hidden')}
+function doReset(){localStorage.removeItem('portal_alumnos');localStorage.removeItem('portal_config');initDB();cancelReset();showToast('Datos reseteados ✓');nav('inicio')}
+
+// ============================================================
+// ELEMENT SDK INIT
+// ============================================================
+const defaultConfig={
+  portal_title:'PORTAL ESCOLAR: MTRA. FERNANDA FLORES',
+  school_name:'Nueva Escuela Mexicana · Ciclo 2024-2025',
+  background_color:'#faf5ff',
+  surface_color:'#ffffff',
+  text_color:'#3d3154',
+  accent_color:'#FFD1DC',
+  secondary_accent:'#E6E6FA',
+  font_family:'Nunito',
+  font_size:16
+};
+
+function applyConfig(config){
+  const title=config.portal_title||defaultConfig.portal_title;
+  const school=config.school_name||defaultConfig.school_name;
+  const bg=config.background_color||defaultConfig.background_color;
+  const surface=config.surface_color||defaultConfig.surface_color;
+  const text=config.text_color||defaultConfig.text_color;
+  const accent=config.accent_color||defaultConfig.accent_color;
+  const secondary=config.secondary_accent||defaultConfig.secondary_accent;
+  const font=config.font_family||defaultConfig.font_family;
+  const size=config.font_size||defaultConfig.font_size;
+
+  document.getElementById('header-title').textContent=title;
+  document.getElementById('header-sub').textContent=school;
+
+  document.body.style.background=bg;
+  document.documentElement.style.setProperty('--bg',bg);
+  document.documentElement.style.setProperty('--card',surface);
+  document.documentElement.style.setProperty('--text',text);
+  document.documentElement.style.setProperty('--rosa',accent);
+  document.documentElement.style.setProperty('--lavanda',secondary);
+  document.body.style.color=text;
+  document.body.style.fontFamily=`${font}, Nunito, sans-serif`;
+  document.body.style.fontSize=`${size}px`;
+
+  document.querySelectorAll('.card').forEach(c=>c.style.background=surface);
+  document.querySelectorAll('th').forEach(t=>{t.style.background=secondary;t.style.color=text});
+  document.querySelectorAll('h1,h2,h3,.font-bold,.font-black').forEach(el=>el.style.fontFamily=`${font}, Nunito, sans-serif`);
+}
+
+if(window.elementSdk){
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange:async(config)=>{applyConfig(config)},
+    mapToCapabilities:(config)=>({
+      recolorables:[
+        {get:()=>config.background_color||defaultConfig.background_color,set:v=>{config.background_color=v;window.elementSdk.setConfig({background_color:v})}},
+        {get:()=>config.surface_color||defaultConfig.surface_color,set:v=>{config.surface_color=v;window.elementSdk.setConfig({surface_color:v})}},
+        {get:()=>config.text_color||defaultConfig.text_color,set:v=>{config.text_color=v;window.elementSdk.setConfig({text_color:v})}},
+        {get:()=>config.accent_color||defaultConfig.accent_color,set:v=>{config.accent_color=v;window.elementSdk.setConfig({accent_color:v})}},
+        {get:()=>config.secondary_accent||defaultConfig.secondary_accent,set:v=>{config.secondary_accent=v;window.elementSdk.setConfig({secondary_accent:v})}}
+      ],
+      borderables:[],
+      fontEditable:{get:()=>config.font_family||defaultConfig.font_family,set:v=>{config.font_family=v;window.elementSdk.setConfig({font_family:v})}},
+      fontSizeable:{get:()=>config.font_size||defaultConfig.font_size,set:v=>{config.font_size=v;window.elementSdk.setConfig({font_size:v})}}
+    }),
+    mapToEditPanelValues:(config)=>new Map([
+      ['portal_title',config.portal_title||defaultConfig.portal_title],
+      ['school_name',config.school_name||defaultConfig.school_name]
+    ])
+  });
+}
+
+// ============================================================
+// BOOT
+// ============================================================
+initDB();
+renderInicio();
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ddda8a1674c291e',t:'MTc3Mzc2NzkyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

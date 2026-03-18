@@ -248,8 +248,10 @@ tr:hover td{background:#f5f5f5}
            <tr>
             <th>#</th>
             <th>Nombre</th>
-            <th>Trabajos %</th>
-            <th>Examen %</th>
+            <th>TRABAJOS EN CLASE %</th>
+            <th>EXAMEN %</th>
+             <th>PROYECTOS FINALES %</th>
+             <th>PARTICIPACIÓN %</th>
             <th>Total</th>
             <th>Semáforo</th>
            </tr>
@@ -552,7 +554,10 @@ function doAddAlumno(){
   const als=getAlumnos();const cfg=getConfig();const tt=cfg.totalTrabajos||15;
   als.push({id:als.length+1,nombre:n,usuario:document.getElementById('m-user').value||'alumno'+(als.length+1),password:document.getElementById('m-pass').value||'1234',
     asistencia:{fechas:[],faltas:0},
-    camposFormativos:Object.fromEntries(CF_KEYS.map(k=>[k,{criterios:[{nombre:'Trabajos',peso:60},{nombre:'Examen',peso:30},{nombre:'Participación',peso:10}],trabajos:Array(tt).fill(false),calExamen:0,promedioFinal:0}])),
+    camposFormativos:Object.fromEntries(CF_KEYS.map(k=>[k,{criterios:[{nombre:'Trabajos',peso:60},{nombre:'Examen',peso:30},{nombre:'Participación',peso:10}],trabajos:Array(tt)trabajos:Array(tt).fill(false),
+trabajos2:Array(tt).fill(false),
+tareas:Array(tt).fill(false),
+actividades:Array(tt).fill(false),calExamen:0,promedioFinal:0}])),
     sisat:{1:{lectura:0,escritura:0,calculo:0},2:{lectura:0,escritura:0,calculo:0},3:{lectura:0,escritura:0,calculo:0}},justificantes:[]});
   saveAlumnos(als);closeModal();renderAlumnos();
 }
@@ -581,7 +586,34 @@ function doDeleteAlumno(id){
   let als=getAlumnos();als=als.filter(x=>x.id!==id);als.forEach((a,i)=>a.id=i+1);
   saveAlumnos(als);closeModal();renderAlumnos();
 }
+<!-- TABLA 1 -->
+<h3>Trabajos</h3>
+<table>
+  <thead id="matrix1-head"></thead>
+  <tbody id="matrix1-body"></tbody>
+</table>
 
+<!-- TABLA 2 -->
+<h3>Trabajos extra</h3>
+<table>
+  <thead id="matrix2-head"></thead>
+  <tbody id="matrix2-body"></tbody>
+</table>
+
+<!-- TABLA 3 -->
+<h3>Tareas</h3>
+<table>
+  <thead id="matrix3-head"></thead>
+  <tbody id="matrix3-body"></tbody>
+</table>
+
+<!-- TABLA 4 -->
+<h3>Actividades</h3>
+<table>
+  <thead id="matrix4-head"></thead>
+  <tbody id="matrix4-body"></tbody>
+</table>
+   
 // ============================================================
 // ASISTENCIA
 // ============================================================
@@ -731,7 +763,6 @@ function renderMatrix(tipo, headId, bodyId) {
   });
 }
 
-function toggleTrabajo(aid, tipo, index, el) {
   const als = getAlumnos();
   const a = als.find(x => x.id === aid);
 
@@ -828,7 +859,7 @@ function cambiarNombreExtra() {
    
  
    
-   function toggleTrabajo(aid,ti,el){
+
   const als=getAlumnos();const a=als.find(x=>x.id===aid);if(!a)return;
   a.camposFormativos[CF_KEYS[activeCF]].trabajos[ti]=!a.camposFormativos[CF_KEYS[activeCF]].trabajos[ti];
   el.classList.toggle('checked');
@@ -879,9 +910,12 @@ function renderConcentrado(){
   const cfg=getConfig();const tt=cfg.totalTrabajos||15;
   als.forEach(a=>{
     const cf=a.camposFormativos[CF_KEYS[activeCF]];
-    const entregados=cf.trabajos.filter(Boolean).length;
+    const entregados=trabajos
+trabajos2
+tareas
+actividades.filter(Boolean).length;
     const pctTrab=tt>0?((entregados/tt)*100).toFixed(1):0;
-    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'PROYECTO'))?.peso||30;
+    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'))?.peso||30;
     const exPond=((cf.calExamen/10)*exPeso).toFixed(1);
     const total=cf.promedioFinal.toFixed(1);
     const semColor=total>=70?'semaph-v':total>=50?'semaph-a':'semaph-r';

@@ -73,7 +73,7 @@ tr:hover td{background:#f5f5f5}
       <button id="menu-toggle" class="md:hidden btn btn-rosa btn-sm"><i data-lucide="menu" style="width:20px;height:20px"></i></button>
       <div>
        <h1 id="header-title" class="text-base md:text-lg font-black tracking-tight" style="color:var(--rosa)">PORTAL ESCOLAR: MTRA. FERNANDA FLORES</h1>
-       <p id="header-sub" class="text-xs font-semibold" style="color:var(--text);opacity:.7">Nueva Escuela Mexicana · Ciclo 2025-2026</p>
+       <p id="header-sub" class="text-xs font-semibold" style="color:var(--text);opacity:.7">Nueva Escuela Mexicana · Ciclo 2024-2025</p>
       </div>
      </div>
      <div class="flex items-center gap-2">
@@ -402,9 +402,15 @@ function logout(){
 
 // EDITAR NOMBRES DE ALUMNOS AQUÍ
 const DEFAULT_NAMES = [
-"ADRIAN EDUARDO AMADOR CHAVEZ","AILINE LUCERO SALAZAR VALENZUELA","AMBER SOFIA MONTAÑO ARVAYO","ANGEL ALBERTO NAVARRO GARCIA","ANTONIO SANCHEZ HERNANDEZ","AYLINN GUADALUPE DIAZ ESQUER","CAMILA SARAHI ESPINOZA HUERTA","CARLOS GUADALUPE VEGA ALCANTAR","CARLOS RAFAEL ALCARAZ MADRID","DAYLIN PAOLA BORBON VALDEZ","DELCID SANTIAGO HERRERA BUSTAMANTE","DYLAN JOAN CORONADO GARCIA","EIITHAN EDUARDO CAZAREZ MOLINA","ERNESTO ANTONIO MORENO RIOS","JESUS ALEXANDER CORONADO ACOSTA","JOSE MANUEL FLORES FIGUEROA","LIZETH ALEJANDRA SALAZAR VALENZUELA","LUIS ANTONIO MORENO ALCARAZ","LUNA HANNAETH OQUITA CUMPLIDO","MARCOS JAVIER BRINGAS FIMBRES","MARIELY FERNANDA MENDEZ RODELO","MIGUEL ANTONIO RODRIGUEZ FIGUEROA","NAHYMA CRISTINA FELIX PEREZ","NAOMI YOSELIN FELIX BOJORQUEZ","NATHALIE GONZALEZ CARDENAS","PABLO HERIBERTO DOMINGUEZ OZUNA","SAMUEL ISAI VELASQUEZ HUASICA"
+  "Sofía García","Mateo López","Valentina Hernández","Santiago Martínez","Camila Rodríguez",
+  "Sebastián Pérez","Regina González","Leonardo Díaz","María José Ramírez","Diego Torres",
+  "Ximena Flores","Emiliano Cruz","Renata Morales","Daniel Reyes","Isabella Jiménez",
+  "Alejandro Ruiz","Lucía Vargas","Andrés Mendoza","Natalia Castillo","Nicolás Ortega",
+  "Ana Paula Guzmán","Joaquín Rojas","Mariana Herrera","Samuel Medina","Fernanda Aguilar",
+  "Miguel Ángel Sánchez","Valeria Romero","Tomás Navarro","Gabriela Delgado","Emilio Fuentes",
+  "Paula Cervantes"
 ];
-   
+
 const CF_KEYS = ['lenguajes','saberes','etica','humano'];
 const CF_NAMES = ['Lenguajes','Saberes y Pensamiento Científico','Ética, Naturaleza y Sociedades','De lo Humano y lo Comunitario'];
 const CF_SHORT = ['Leng','Saberes','Ética','Humano'];
@@ -610,304 +616,279 @@ function saveAsistencia(){
 }
 
 // ============================================================
-// CALIFICACIONES
+// CONFIGURACIÓN
 // ============================================================
-let activeCF=0;
+let activeCF = 0;
 
-function renderCalificaciones(){
-  const tabs=document.getElementById('cf-tabs');tabs.innerHTML='';
-  CF_NAMES.forEach((n,i)=>{
-    tabs.innerHTML+=`<button class="tab-btn ${i===activeCF?'active':''}" onclick="setCF(${i},this)">${n}</button>`
+// 👇 NOMBRES DE LAS 4 TABLAS TIPO TRABAJOS (PUEDES CAMBIARLOS)
+const TIPOS_TRABAJOS = ["trabajos", "trabajos2", "tareas", "actividades"];
+
+// 👇 NOMBRE DE LA TABLA EXTRA EDITABLE
+let nombreTablaExtra = "participación";
+
+// ============================================================
+// RENDER GENERAL
+// ============================================================
+function renderCalificaciones() {
+  const tabs = document.getElementById('cf-tabs');
+  tabs.innerHTML = '';
+
+  CF_NAMES.forEach((n, i) => {
+    tabs.innerHTML += `
+      <button class="tab-btn ${i === activeCF ? 'active' : ''}" onclick="setCF(${i},this)">
+        ${n}
+      </button>`;
   });
-  renderCriterios();renderMatrix();renderExamen();renderConcentrado();
+
+  renderCriterios();
+
+  // 👇 RENDER DE LAS 4 TABLAS
+  renderMatrix("trabajos", "matrix1-head", "matrix1-body");
+  renderMatrix("trabajos2", "matrix2-head", "matrix2-body");
+  renderMatrix("tareas", "matrix3-head", "matrix3-body");
+  renderMatrix("actividades", "matrix4-head", "matrix4-body");
+
+  renderExamen();
+  renderExtra(); // 👈 NUEVA TABLA
+  renderConcentrado();
 }
 
-function setCF(i,btn){
-  activeCF=i;
-  document.querySelectorAll('#cf-tabs .tab-btn').forEach(b=>b.classList.remove('active'));
+function setCF(i, btn) {
+  activeCF = i;
+  document.querySelectorAll('#cf-tabs .tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  renderCriterios();renderMatrix();renderExamen();renderConcentrado()
+  renderCalificaciones();
 }
 
 // ============================================================
-// CRITERIOS
+// ACTUALIZAR CANTIDAD DE COLUMNAS
 // ============================================================
+function updateTrabajos() {
+  const n = parseInt(document.getElementById('total-trabajos').value) || 10;
+  const als = getAlumnos();
 
-function renderCriterios(){
-  const als=getAlumnos();if(!als.length)return;
-  const cf=als[0].camposFormativos[CF_KEYS[activeCF]];
-  const list=document.getElementById('criterios-list');list.innerHTML='';
+  als.forEach(a => {
+    TIPOS_TRABAJOS.forEach(tipo => {
+      const cf = a.camposFormativos[CF_KEYS[activeCF]];
 
-  cf.criterios.forEach((c,i)=>{
-    list.innerHTML+=`
-    <div class="flex items-center gap-2">
-      <input value="${c.nombre}" onchange="updateCriterioName(${i},this.value)" class="flex-1">
-      <input type="number" value="${c.peso}" min="0" max="100" class="w-20" onchange="updateCriterioPeso(${i},this.value)">
-      <span class="text-sm font-bold">%</span>
-      ${cf.criterios.length>1?`<button onclick="removeCriterio(${i})" class="btn btn-rosa btn-sm">×</button>`:''}
-    </div>`;
-  });
+      if (!cf[tipo]) cf[tipo] = [];
 
-  validateCriterios();
-}
+      const old = cf[tipo];
 
-function addCriterio(){
-  const als=getAlumnos();
-  als.forEach(a=>{
-    a.camposFormativos[CF_KEYS[activeCF]].criterios.push({
-      nombre:'Nuevo',
-      peso:0,
-      valor:0
-    })
-  });
-  saveAlumnos(als);
-  renderCriterios();
-  renderMatrix();
-  renderConcentrado();
-}
-
-function removeCriterio(i){
-  const als=getAlumnos();
-  als.forEach(a=>a.camposFormativos[CF_KEYS[activeCF]].criterios.splice(i,1));
-  saveAlumnos(als);
-  renderCriterios();
-  renderMatrix();
-  renderConcentrado();
-}
-
-function updateCriterioName(i,v){
-  const als=getAlumnos();
-  als.forEach(a=>a.camposFormativos[CF_KEYS[activeCF]].criterios[i].nombre=v);
-  saveAlumnos(als);
-}
-
-function updateCriterioPeso(i,v){
-  const als=getAlumnos();
-  als.forEach(a=>a.camposFormativos[CF_KEYS[activeCF]].criterios[i].peso=parseInt(v)||0);
-  saveAlumnos(als);
-  validateCriterios();
-}
-
-function validateCriterios(){
-  const als=getAlumnos();if(!als.length)return;
-  const sum=als[0].camposFormativos[CF_KEYS[activeCF]].criterios.reduce((s,c)=>s+c.peso,0);
-  const warn=document.getElementById('criterios-warn');
-
-  if(sum!==100){
-    warn.textContent=`⚠ La suma es ${sum}%. Debe ser 100%.`;
-    warn.classList.remove('hidden')
-  } else {
-    warn.classList.add('hidden')
-  }
-}
-
-// ============================================================
-// TRABAJOS
-// ============================================================
-
-function updateTrabajos(){
-  const n=parseInt(document.getElementById('total-trabajos').value)||15;
-  const cfg=getConfig();cfg.totalTrabajos=n;saveConfig(cfg);
-
-  const als=getAlumnos();
-  als.forEach(a=>{
-    CF_KEYS.forEach(k=>{
-      const old=a.camposFormativos[k].trabajos;
-      if(old.length<n)a.camposFormativos[k].trabajos=[...old,...Array(n-old.length).fill(false)];
-      else a.camposFormativos[k].trabajos=old.slice(0,n);
-    })
+      if (old.length < n) {
+        cf[tipo] = [...old, ...Array(n - old.length).fill(false)];
+      } else {
+        cf[tipo] = old.slice(0, n);
+      }
+    });
   });
 
   saveAlumnos(als);
-  renderMatrix();
+  renderCalificaciones();
 }
 
 // ============================================================
-// MATRIZ (AQUÍ ESTÁ EL CAMBIO GRANDE)
+// TABLAS TIPO TRABAJOS
 // ============================================================
+function renderMatrix(tipo, headId, bodyId) {
+  const als = getAlumnos();
+  const tt = parseInt(document.getElementById('total-trabajos').value) || 10;
 
-function renderMatrix(){
-  const als=getAlumnos();
-  const cfg=getConfig();
-  const tt=cfg.totalTrabajos||15;
+  const head = document.getElementById(headId);
+  const body = document.getElementById(bodyId);
 
-  const head=document.getElementById('matrix-head');
-  const body=document.getElementById('matrix-body');
+  head.innerHTML = `
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      ${Array.from({ length: tt }, (_, i) => `<th>${tipo[0].toUpperCase()}${i + 1}</th>`).join('')}
+      <th>%</th>
+    </tr>
+  `;
 
-  const cfBase=als[0].camposFormativos[CF_KEYS[activeCF]];
+  body.innerHTML = '';
 
-  head.innerHTML=`<tr>
-    <th>#</th>
-    <th>Nombre</th>
-    ${Array.from({length:tt},(_,i)=>`<th>T${i+1}</th>`).join('')}
-    ${cfBase.criterios.map(c=>`<th>${c.nombre}</th>`).join('')}
-    <th>%</th>
-  </tr>`;
+  als.forEach(a => {
+    const cf = a.camposFormativos[CF_KEYS[activeCF]];
 
-  body.innerHTML='';
+    if (!cf[tipo]) cf[tipo] = Array(tt).fill(false);
 
-  als.forEach(a=>{
-    const cf=a.camposFormativos[CF_KEYS[activeCF]];
-    const t=cf.trabajos;
-    const entregados=t.filter(Boolean).length;
-    const pct=tt>0?((entregados/tt)*100).toFixed(1):0;
+    const t = cf[tipo];
+    const entregados = t.filter(Boolean).length;
+    const pct = tt > 0 ? ((entregados / tt) * 100).toFixed(1) : 0;
 
-    body.innerHTML+=`<tr>
-      <td>${a.id}</td>
-      <td class="text-left font-semibold text-xs">${a.nombre}</td>
-
-      ${t.map((v,j)=>`
-        <td>
-          <div class="check-mark ${v?'checked':''}" onclick="toggleTrabajo(${a.id},${j},this)">✓</div>
-        </td>`).join('')}
-
-      ${cf.criterios.map((c,i)=>`
-        <td>
-          <input type="number" min="0" max="10" step="0.1"
-          value="${c.valor||0}"
-          class="w-16 text-center"
-          onchange="setCriterio(${a.id},${i},this.value)">
-        </td>`).join('')}
-
-      <td class="font-bold">${pct}</td>
-    </tr>`;
+    body.innerHTML += `
+      <tr>
+        <td>${a.id}</td>
+        <td class="text-left">${a.nombre}</td>
+        ${t.map((v, j) => `
+          <td>
+            <div class="check-mark ${v ? 'checked' : ''}" 
+                 onclick="toggleTrabajo(${a.id}, '${tipo}', ${j}, this)">✓</div>
+          </td>`).join('')}
+        <td>${pct}</td>
+      </tr>`;
   });
 }
 
-// ============================================================
-// GUARDAR CRITERIO
-// ============================================================
+function toggleTrabajo(aid, tipo, index, el) {
+  const als = getAlumnos();
+  const a = als.find(x => x.id === aid);
 
-function setCriterio(aid,ci,val){
-  const als=getAlumnos();
-  const a=als.find(x=>x.id===aid);
-  if(!a)return;
-
-  a.camposFormativos[CF_KEYS[activeCF]].criterios[ci].valor=parseFloat(val)||0;
-
-  recalcPromedios(als);
-  saveAlumnos(als);
-  renderConcentrado();
-}
-
-// ============================================================
-// TOGGLE TRABAJO
-// ============================================================
-
-function toggleTrabajo(aid,ti,el){
-  const als=getAlumnos();
-  const a=als.find(x=>x.id===aid);
-  if(!a)return;
-
-  a.camposFormativos[CF_KEYS[activeCF]].trabajos[ti]=!a.camposFormativos[CF_KEYS[activeCF]].trabajos[ti];
+  const cf = a.camposFormativos[CF_KEYS[activeCF]];
+  cf[tipo][index] = !cf[tipo][index];
 
   el.classList.toggle('checked');
 
-  recalcPromedios(als);
   saveAlumnos(als);
-  renderConcentrado();
+  renderCalificaciones();
 }
 
 // ============================================================
-// EXAMEN
+// EXAMEN (0-10)
 // ============================================================
+function renderExamen() {
+  const als = getAlumnos();
+  const tb = document.getElementById('tb-examen');
+  tb.innerHTML = '';
+
+  als.forEach(a => {
+    const cf = a.camposFormativos[CF_KEYS[activeCF]];
+
+    tb.innerHTML += `
+      <tr>
+        <td>${a.id}</td>
+        <td>${a.nombre}</td>
+        <td>
+          <input type="number" min="0" max="10" step="0.1"
+            value="${cf.calExamen || 0}"
+            onchange="setExamen(${a.id}, this.value)">
+        </td>
+      </tr>`;
+  });
+}
+
+function setExamen(aid, val) {
+  const als = getAlumnos();
+  const a = als.find(x => x.id === aid);
+
+  a.camposFormativos[CF_KEYS[activeCF]].calExamen = parseFloat(val) || 0;
+
+  saveAlumnos(als);
+}
+
+// ============================================================
+// TABLA EXTRA (PARTICIPACIÓN / PROYECTOS)
+// ============================================================
+function renderExtra() {
+  const als = getAlumnos();
+  const tb = document.getElementById('tb-extra');
+  tb.innerHTML = '';
+
+  document.getElementById('titulo-extra').textContent = nombreTablaExtra;
+
+  als.forEach(a => {
+    const cf = a.camposFormativos[CF_KEYS[activeCF]];
+
+    if (cf.extra === undefined) cf.extra = 0;
+
+    tb.innerHTML += `
+      <tr>
+        <td>${a.id}</td>
+        <td>${a.nombre}</td>
+        <td>
+          <input type="number" min="0" max="10" step="0.1"
+            value="${cf.extra}"
+            onchange="setExtra(${a.id}, this.value)">
+        </td>
+      </tr>`;
+  });
+}
+
+function setExtra(aid, val) {
+  const als = getAlumnos();
+  const a = als.find(x => x.id === aid);
+
+  a.camposFormativos[CF_KEYS[activeCF]].extra = parseFloat(val) || 0;
+
+  saveAlumnos(als);
+}
+
+// ============================================================
+// CAMBIAR NOMBRE DE TABLA EXTRA
+// ============================================================
+function cambiarNombreExtra() {
+  const nuevo = prompt("Escribe el nombre (ej. participación, proyectos):");
+
+  if (nuevo) {
+    nombreTablaExtra = nuevo;
+    renderExtra();
+  }
+}
+   
+ 
+   
+   function toggleTrabajo(aid,ti,el){
+  const als=getAlumnos();const a=als.find(x=>x.id===aid);if(!a)return;
+  a.camposFormativos[CF_KEYS[activeCF]].trabajos[ti]=!a.camposFormativos[CF_KEYS[activeCF]].trabajos[ti];
+  el.classList.toggle('checked');
+  recalcPromedios(als);saveAlumnos(als);
+  // update percentage inline
+  const tr=el.closest('tr');const tds=tr.querySelectorAll('td');
+  const t=a.camposFormativos[CF_KEYS[activeCF]].trabajos;
+  const pct=t.length>0?((t.filter(Boolean).length/t.length)*100).toFixed(1):0;
+  tds[tds.length-1].textContent=pct;
+  renderConcentrado();
+}
 
 function renderExamen(){
-  const als=getAlumnos();
-  const tb=document.getElementById('tb-examen');
-  tb.innerHTML='';
-
+  const als=getAlumnos();const tb=document.getElementById('tb-examen');tb.innerHTML='';
   als.forEach(a=>{
     const cf=a.camposFormativos[CF_KEYS[activeCF]];
     const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'))?.peso||30;
     const pond=((cf.calExamen/10)*exPeso).toFixed(1);
-
-    tb.innerHTML+=`<tr>
-      <td>${a.id}</td>
-      <td class="text-left font-semibold">${a.nombre}</td>
-      <td><input type="number" min="0" max="10" step="0.1" value="${cf.calExamen}" onchange="setExamen(${a.id},this.value)"></td>
-      <td class="font-bold">${pond}</td>
-    </tr>`;
+    tb.innerHTML+=`<tr><td>${a.id}</td><td class="text-left font-semibold">${a.nombre}</td>
+      <td><input type="number" min="0" max="10" step="0.1" value="${cf.calExamen}" class="w-20 text-center" onchange="setExamen(${a.id},this.value)"></td>
+      <td class="font-bold">${pond}</td></tr>`;
   });
 }
-
 function setExamen(aid,val){
-  const als=getAlumnos();
-  const a=als.find(x=>x.id===aid);
-  if(!a)return;
-
+  const als=getAlumnos();const a=als.find(x=>x.id===aid);if(!a)return;
   a.camposFormativos[CF_KEYS[activeCF]].calExamen=parseFloat(val)||0;
-
-  recalcPromedios(als);
-  saveAlumnos(als);
-  renderExamen();
-  renderConcentrado();
+  recalcPromedios(als);saveAlumnos(als);renderExamen();renderConcentrado();
 }
-
-// ============================================================
-// PROMEDIOS (AHORA DINÁMICO)
-// ============================================================
 
 function recalcPromedios(als){
-  const cfg=getConfig();
-  const tt=cfg.totalTrabajos||15;
-
-  als.forEach(a=>{
-    CF_KEYS.forEach(k=>{
-      const cf=a.camposFormativos[k];
-
-      let total=0;
-
-      cf.criterios.forEach(c=>{
-        let score=0;
-
-        if(c.nombre.toLowerCase().includes('trabajo')){
-          const entregados=cf.trabajos.filter(Boolean).length;
-          const pct=tt>0?(entregados/tt)*100:0;
-          score=(pct/100)*c.peso;
-        } 
-        else if(c.nombre.toLowerCase().includes('examen')){
-          score=(cf.calExamen/10)*c.peso;
-        } 
-        else{
-          score=((c.valor||0)/10)*c.peso;
-        }
-
-        total+=score;
-      });
-
-      cf.promedioFinal=Math.min(100,total);
-    });
-  });
+  const cfg=getConfig();const tt=cfg.totalTrabajos||15;
+  als.forEach(a=>{CF_KEYS.forEach(k=>{
+    const cf=a.camposFormativos[k];
+    const entregados=cf.trabajos.filter(Boolean).length;
+    const pctTrab=tt>0?(entregados/tt)*100:0;
+    const trabPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('trabajo'))?.peso||60;
+    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'))?.peso||30;
+    const partPeso=cf.criterios.reduce((s,c)=>s+c.peso,0)-trabPeso-exPeso;
+    const trabScore=(pctTrab/100)*trabPeso;
+    const exScore=(cf.calExamen/10)*exPeso;
+    const partScore=partPeso>0?(partPeso*0.8):0; // default 80% participation
+    cf.promedioFinal=Math.min(100,trabScore+exScore+partScore);
+  })});
 }
-
-// ============================================================
-// CONCENTRADO (YA CON COLUMNAS DE CRITERIOS)
-// ============================================================
 
 function renderConcentrado(){
-  const als=getAlumnos();
-  const tb=document.getElementById('tb-concentrado');
-  tb.innerHTML='';
-
+  const als=getAlumnos();const tb=document.getElementById('tb-concentrado');tb.innerHTML='';
+  const cfg=getConfig();const tt=cfg.totalTrabajos||15;
   als.forEach(a=>{
     const cf=a.camposFormativos[CF_KEYS[activeCF]];
+    const entregados=cf.trabajos.filter(Boolean).length;
+    const pctTrab=tt>0?((entregados/tt)*100).toFixed(1):0;
+    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'))?.peso||30;
+    const exPond=((cf.calExamen/10)*exPeso).toFixed(1);
     const total=cf.promedioFinal.toFixed(1);
     const semColor=total>=70?'semaph-v':total>=50?'semaph-a':'semaph-r';
-
-    tb.innerHTML+=`<tr>
-      <td>${a.id}</td>
-      <td class="text-left font-semibold">${a.nombre}</td>
-
-      ${cf.criterios.map(c=>`
-        <td>${(c.valor||0).toFixed(1)}</td>
-      `).join('')}
-
-      <td class="font-bold">${total}</td>
-      <td><span class="semaph ${semColor}"></span></td>
-    </tr>`;
+    tb.innerHTML+=`<tr><td>${a.id}</td><td class="text-left font-semibold">${a.nombre}</td><td>${pctTrab}</td><td>${exPond}</td><td class="font-bold">${total}</td><td><span class="semaph ${semColor}"></span></td></tr>`;
   });
 }
+
 // ============================================================
 // SISAT - Enhanced with Multiple Tools (Lectura, Textos, Cálculo)
 // ============================================================

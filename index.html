@@ -818,7 +818,7 @@ function setExtra(aid, val) {
 // CAMBIAR NOMBRE DE TABLA EXTRA
 // ============================================================
 function cambiarNombreExtra() {
-  const nuevo = prompt("Escribe el nombre (ej. participación, proyectos):");
+  const nuevo = prompt("participación, proyectos):");
 
   if (nuevo) {
     nombreTablaExtra = nuevo;
@@ -881,7 +881,7 @@ function renderConcentrado(){
     const cf=a.camposFormativos[CF_KEYS[activeCF]];
     const entregados=cf.trabajos.filter(Boolean).length;
     const pctTrab=tt>0?((entregados/tt)*100).toFixed(1):0;
-    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'))?.peso||30;
+    const exPeso=cf.criterios.find(c=>c.nombre.toLowerCase().includes('examen'PROYECTO'))?.peso||30;
     const exPond=((cf.calExamen/10)*exPeso).toFixed(1);
     const total=cf.promedioFinal.toFixed(1);
     const semColor=total>=70?'semaph-v':total>=50?'semaph-a':'semaph-r';
